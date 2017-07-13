@@ -1,3 +1,64 @@
-﻿<div>
-    
+﻿<div class="add-block-margin">
+    <fieldset class="add-border">
+        <div class="add-padding">
+            <div class="text-center">
+                <label class="add-margin">name:</label>
+                <input class="add-margin" type="text" size="10" />
+                <label class="add-margin">birth date:</label>
+                <input class="add-margin" type="date" />
+            </div>
+            <button class="add-photographer btn btn-default">Add</button>
+        </div>
+    </fieldset>
 </div>
+
+<div class="photographers-table add-block-margin">
+    <table class="table table-striped table-condensed add-border">
+        
+        <thead>
+            <tr>
+                <td>name</td>
+                <td>birth date</td>
+                <td>picture count</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="photographer in vm.photographers">
+                <td><a ng-click="vm.goToPhotographer(photographer.id)">{{ photographer.name }}</a></td>
+                <td>{{ photographer.birthDate }}</td>
+                <td>{{ photographer.pictureCount }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<style>
+    table td {
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+    }
+    thead{
+        background-color: lightgray;
+    }
+    .add-border{
+        border: 2px solid black;
+    }
+    .add-block-margin{
+        margin-left: 20%;
+        margin-top: 5%;
+        margin-right: 30%;
+    }
+    .add-photographer{
+        float: right;
+        margin-right: 35px;
+        margin-bottom: 35px;
+        margin-top: 20px;
+    }
+    .add-padding{
+        padding: 10%;
+    }
+    .add-margin{
+        margin: 10px;
+    }
+</style>
