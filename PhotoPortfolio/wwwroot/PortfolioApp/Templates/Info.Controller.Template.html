@@ -3,11 +3,11 @@
         <div class="add-padding">
             <div class="text-center">
                 <label class="add-margin">name:</label>
-                <input class="add-margin" type="text" size="10" />
+                <input ng-model="vm.newName" class="add-margin" type="text" size="10" />
                 <label class="add-margin">birth date:</label>
-                <input class="add-margin" type="date" />
+                <input ng-model="vm.newBirthDate" class="add-margin" type="date" />
             </div>
-            <button class="add-photographer btn btn-default">Add</button>
+            <button ng-click="vm.createPhotographer()" class="add-photographer btn btn-default">Add</button>
         </div>
     </fieldset>
 </div>
