@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\PortfolioApp\pegination.Directive.js" />
+    <Content Include="wwwroot\PortfolioApp\Templates\Pegination.Directive.Template.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

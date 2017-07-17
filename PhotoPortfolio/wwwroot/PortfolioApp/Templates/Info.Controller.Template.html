@@ -30,6 +30,16 @@
             </tr>
         </tbody>
     </table>
+
+    <div>
+        <button class="btn btn-default"
+                ng-repeat="page in vm.pages" 
+                ng-click="vm.goToPage(page.number)"
+                ng-class="{btn-primary: vm.currentPage===page.number}">
+            {{ page.number }}
+        </button>
+    </div>
+
 </div>
 
 
