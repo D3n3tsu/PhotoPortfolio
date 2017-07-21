@@ -25,28 +25,14 @@ namespace PhotoPortfolio.Controllers
         [HttpGet("photographers/")]
         public Task<JsonResult> GetPhotographers()
         {
-            string result = JsonConvert.SerializeObject(
-                _repository.GetAllPhotographers(),
-                Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
-            return Task.FromResult(Json(result));
+            return Task.FromResult(Json(_repository.GetAllPhotographers()));
         }
 
         // GET api/photographers/5
         [HttpGet("photographers/{id}")]
         public Task<JsonResult> GetPhotographer(int id)
         {
-            string result = JsonConvert.SerializeObject(
-                _repository.GetPhotographer(id),
-                Formatting.Indented,
-                new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
-            return Task.FromResult(Json(result));
+            return Task.FromResult(Json(_repository.GetPhotographer(id)));
         }
 
         // POST api/
