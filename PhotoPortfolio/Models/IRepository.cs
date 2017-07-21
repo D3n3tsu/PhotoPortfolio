@@ -7,9 +7,10 @@ namespace PhotoPortfolio.Models
 {
     public interface IRepository
     {
-        void CreatePhotographer(string name, DateTime birthDate);
-        Photographer GetPhotographer(int id);
-        void UpdatePhotographer(Photographer photographer);
-        void DeletePhotographer(int id);
+        Task<IEnumerable<Photographer>> GetAllPhotographers();
+        Task CreatePhotographer(string name, DateTime birthDate);
+        Task<Photographer> GetPhotographer(int id);
+        Task UpdatePhotographer(Photographer photographer);
+        Task DeletePhotographer(int id);
     }
 }
