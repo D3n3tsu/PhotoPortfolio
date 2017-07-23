@@ -12,7 +12,8 @@ namespace PhotoPortfolio.Models
 
         public async Task CreatePhotographer(string name, DateTime birthDate)
         {
-            using (SqliteConnection con = new SqliteConnection())
+            using (SqliteConnection con = new SqliteConnection(
+                Startup.Configuration["ConnectionStrings:SQLiteConnection"]))
             {
                 using (SqliteCommand cmd = con.CreateCommand())
                 {
@@ -42,7 +43,8 @@ namespace PhotoPortfolio.Models
 
         public async Task DeletePhotographer(int id)
         {
-            using (SqliteConnection con = new SqliteConnection())
+            using (SqliteConnection con = new SqliteConnection(
+                Startup.Configuration["ConnectionStrings:SQLiteConnection"]))
             {
                 using (SqliteCommand cmd = con.CreateCommand())
                 {
@@ -71,7 +73,8 @@ namespace PhotoPortfolio.Models
         public async Task<IEnumerable<Photographer>> GetAllPhotographers()
         {
             List<Photographer> photographers = new List<Photographer>();
-            using (SqliteConnection con = new SqliteConnection())
+            using (SqliteConnection con = new SqliteConnection(
+                Startup.Configuration["ConnectionStrings:SQLiteConnection"]))
             {
                 using (SqliteCommand cmd = con.CreateCommand())
                 {
@@ -107,7 +110,8 @@ namespace PhotoPortfolio.Models
         public async Task<Photographer> GetPhotographer(int id)
         {
             Photographer photographer = new Photographer();
-            using (SqliteConnection con = new SqliteConnection())
+            using (SqliteConnection con = new SqliteConnection(
+                Startup.Configuration["ConnectionStrings:SQLiteConnection"]))
             {
                 using (SqliteCommand cmd = con.CreateCommand())
                 {
@@ -146,7 +150,8 @@ namespace PhotoPortfolio.Models
 
         public async Task UpdatePhotographer(Photographer photographer)
         {
-            using (SqliteConnection con = new SqliteConnection())
+            using (SqliteConnection con = new SqliteConnection(
+                Startup.Configuration["ConnectionStrings:SQLiteConnection"]))
             {
                 using (SqliteCommand cmd = con.CreateCommand())
                 {

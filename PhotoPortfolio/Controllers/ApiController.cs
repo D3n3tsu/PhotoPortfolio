@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using PhotoPortfolio.Models;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using PhotoPortfolio.Models.ViewModels;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PhotoPortfolio.Controllers
 {
@@ -22,7 +22,7 @@ namespace PhotoPortfolio.Controllers
         }
 
         // GET: api/photographers
-        [HttpGet("photographers/")]
+        [HttpGet("photographers")]
         public Task<JsonResult> GetPhotographers()
         {
             return Task.FromResult(Json(_repository.GetAllPhotographers()));
@@ -35,22 +35,33 @@ namespace PhotoPortfolio.Controllers
             return Task.FromResult(Json(_repository.GetPhotographer(id)));
         }
 
-        // POST api/
-        [HttpPost("")]
-        public void Post([FromBody]string value)
+        // POST api/create-photographer
+        [HttpPost("create-photographer")]
+        public Task<JsonResult> Post([FromBody]CreatePhotographerViewModel photographer)
         {
+            _repository.CreatePhotographer(photographer.Name, photographer.BirthDate);
+            
+            return Task.FromResult(Json(_repository.GetAllPhotographers()));
         }
 
         // PUT api/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("update-photographer/{id}")]
+        public void Put(int id, [FromBody]CreatePhotographerViewModel photographer)
         {
+            _repository.UpdatePhotographer(
+                new Photographer
+                {
+                    Id = id,
+                    Name = photographer.Name,
+                    BirthDate = photographer.BirthDate
+                });
         }
 
         // DELETE api/5
-        [HttpDelete("{id}")]
+        [HttpDelete("delete-photographer/{id}")]
         public void Delete(int id)
         {
+            _repository.DeletePhotographer(id);
         }
     }
 }
