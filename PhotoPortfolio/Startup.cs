@@ -26,7 +26,7 @@ namespace PhotoPortfolio
 
             Configuration = builder.Build();
 
-            new DatabaseCreation().EnsureTableCreation();
+            new DatabaseCreation().EnsureTablesCreation();
         }
 
 

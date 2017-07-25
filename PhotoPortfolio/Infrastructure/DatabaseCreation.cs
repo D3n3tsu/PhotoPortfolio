@@ -8,7 +8,7 @@ namespace PhotoPortfolio.Infrastructure
 {
     public class DatabaseCreation
     {
-        public void EnsureTableCreation()
+        public void EnsureTablesCreation()
         {
             using(SqliteConnection con = new SqliteConnection(
                 Startup.Configuration["ConnectionStrings:SQLiteConnection"]))
@@ -26,7 +26,23 @@ namespace PhotoPortfolio.Infrastructure
                     }
                     catch(SqliteException ex)
                     {
-                        throw new Exception("Problem while table creation " + ex);
+                        throw new Exception("Problem while photographers table creation " + ex);
+                    }
+                }
+                using (SqliteCommand cmd = con.CreateCommand())
+                {
+                    cmd.CommandText = "CREATE table IF NOT EXISTS photos "
+                        + "(id INTEGER PRIMARY KEY NOT NULL, "
+                        + "photo BLOB NOT NULL, "
+                        + "photographer_id INTEGER NOT NULL)";
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (SqliteException ex)
+                    {
+                        throw new Exception("Problem while photos table creation " + ex);
                     }
                 }
             }
