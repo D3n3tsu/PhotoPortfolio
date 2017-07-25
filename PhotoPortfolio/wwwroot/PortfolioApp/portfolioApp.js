@@ -7,7 +7,9 @@
         .config(function ($routeProvider) {
             $routeProvider
                 .when("/", {
-                    templateUrl: "PortfolioApp/Templates/Info.Controller.Template.html"
+                    templateUrl: "PortfolioApp/Templates/Info.Controller.Template.html",
+                    controller: 'infoController',
+                    controllerAs: 'vm'
                 });
         });
 })();

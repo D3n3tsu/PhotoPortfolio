@@ -1,4 +1,6 @@
-﻿<div class="add-block-margin">
+﻿
+
+<div class="add-block-margin">
     <fieldset class="add-border">
         <div class="add-padding">
             <div class="text-center">
@@ -23,21 +25,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="photographer in vm.photographers">
+            <tr ng-repeat="photographer in vm.pagePhotographers">
                 <td><a ng-click="vm.goToPhotographer(photographer.id)">{{ photographer.name }}</a></td>
-                <td>{{ photographer.birthDate }}</td>
+                <td>{{ photographer.birthDate | date }}</td>
                 <td>{{ photographer.pictureCount }}</td>
             </tr>
         </tbody>
     </table>
 
-    <div>
-        <button class="btn btn-default"
-                ng-repeat="page in vm.pages" 
-                ng-click="vm.goToPage(page.number)"
-                ng-class="{btn-primary: vm.currentPage===page.number}">
-            {{ page.number }}
-        </button>
+    <div class="text-center">
+        <div ng-repeat="page in vm.pages" class="inline">
+            <button class="btn btn-default"
+                    ng-click="vm.goToPage(page)"
+                    ng-class="{'btn-primary': vm.currentPage===page}">
+                {{ page }}
+            </button>
+        </div>
     </div>
 
 </div>
@@ -70,5 +73,8 @@
     }
     .add-margin{
         margin: 10px;
+    } 
+    .inline {
+        display: inline;
     }
 </style>
