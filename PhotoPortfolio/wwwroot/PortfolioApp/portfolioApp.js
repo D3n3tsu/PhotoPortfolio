@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('portfolioApp', [
-        'ngRoute'
+        'ngRoute',
+        'angularFileUpload'
     ])
         .config(function ($routeProvider) {
             $routeProvider
@@ -10,6 +11,11 @@
                     templateUrl: "PortfolioApp/Templates/Info.Controller.Template.html",
                     controller: 'infoController',
                     controllerAs: 'vm'
+                })
+                .when("/photographer", {
+                    templateUrl: "PortfolioApp/Templates/Photos.Controller.Template.html",
+                    controller: "photosController",
+                    controllerAs: "vm"
                 });
         });
 })();

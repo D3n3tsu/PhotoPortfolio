@@ -6,7 +6,7 @@
         .controller('infoController', infoController);
     
 
-    function infoController($http) {
+    function infoController($http, FileUploader) {
         var vm = this;
         vm.title = 'Info';
         vm.getUrl = '/api/photographers';
