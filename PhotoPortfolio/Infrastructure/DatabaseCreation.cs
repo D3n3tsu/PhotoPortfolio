@@ -34,6 +34,7 @@ namespace PhotoPortfolio.Infrastructure
                     cmd.CommandText = "CREATE table IF NOT EXISTS photos "
                         + "(id INTEGER PRIMARY KEY NOT NULL, "
                         + "photo BLOB NOT NULL, "
+                        + "thumbnail BLOB NOT NULL, "
                         + "photographer_id INTEGER NOT NULL)";
                     try
                     {
