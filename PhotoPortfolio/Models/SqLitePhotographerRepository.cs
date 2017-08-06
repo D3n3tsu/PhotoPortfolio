@@ -51,20 +51,26 @@ namespace PhotoPortfolio.Models
 
                 using (SqliteCommand cmd = con.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT * FROM photographers WHERE name = @name";
+                    cmd.CommandText = "SELECT id, name, birth_date FROM photographers " +
+                        "WHERE name = @name";
                     cmd.Parameters.AddWithValue("@name", name);
                     Photographer savedPhotographer = null;
 
                     try
                     {
                         await con.OpenAsync();
-                        var reader = await cmd.ExecuteReaderAsync();
-                        bool hasSaved = await reader.ReadAsync();
-                        if(hasSaved)
-                        savedPhotographer = new Photographer {
-                            Id = int.Parse((string)reader["id"]),
-                            Name = (string)reader["name"],
-                            BirthDate = DateTime.Parse((string)reader["birth_date"])
+                        SqliteDataReader dr = await cmd.ExecuteReaderAsync();
+                        bool hasSaved = await dr.ReadAsync();
+                        if(hasSaved){
+                            int savedId = int.Parse(dr["id"].ToString());
+                            string savedName = dr["name"].ToString();
+                            DateTime savedBirthDate = DateTime.Parse(dr["birth_date"].ToString());
+                            savedPhotographer = new Photographer
+                            {
+                                Id = savedId,
+                                Name = savedName,
+                                BirthDate = savedBirthDate
+                            };
                         };
                     }
                     catch(SqliteException ex)

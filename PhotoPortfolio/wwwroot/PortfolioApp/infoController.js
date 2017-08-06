@@ -9,6 +9,7 @@
     function infoController($http, FileUploader) {
         var vm = this;
         vm.title = 'Info';
+        vm.message = '';
         vm.getUrl = '/api/photographers';
         vm.postUrl = '/api/create-photographer/';
         vm.photographers = [];
@@ -24,13 +25,13 @@
         function activate() {
             vm.createPhotographer = createPhGrapher;
             vm.getData = getData;
-            vm.goToPhotographer = goToPhotographer;
             vm.goToPage = goToPage;
             vm.getData();
             vm.maxPages = Math.ceil(vm.photographers.length / 3);
         }
 
         function createPhGrapher() {
+            vm.message = 'Creating photographer. Please wait.';
             var data = {
                 'name': vm.newName,
                 'birthDate': vm.newBirthDate
@@ -46,7 +47,7 @@
                  )
                 .then(function (responce) {
                     //success
-                    vm.photographers = responce.data.result;
+                    vm.photographers.push(responce.data.result);
                 })
                 .catch(function (responce) {
                     //failure
@@ -56,17 +57,17 @@
                     //finally
                     vm.maxPages = Math.ceil(vm.photographers.length / 3);
                     vm.goToPage(vm.currentPage);
+                    vm.message = '';
                 });
         }
 
         function getData() {
-
+            vm.message = 'Getting data. Please wait.';
             
             $http.get(vm.getUrl)
                 .then(function (responce) {
-                    //success
-                    
-                    vm.photographers = responce.data.result;
+                    //success 
+                    vm.photographers = responce.data;
                 })
                 .catch(function (responce) {
                     //failure
@@ -76,12 +77,11 @@
                     //finally
                     vm.maxPages = Math.ceil(vm.photographers.length / 3);
                     vm.goToPage(vm.currentPage);
+                    vm.message = '';
                 });
         }
 
-        function goToPhotographer(id) {
-            console.log('goToPhotographer(' + id + ')');
-        }
+
 
         function constructPages() {
             
@@ -127,7 +127,6 @@
                 vm.pagePhotographers = vm.photographers.slice(firstItem, firstItem + 3);
                 
             }
-            console.log(page, vm.maxPages);
         }
     }
 })();

@@ -26,7 +26,8 @@
         </thead>
         <tbody>
             <tr ng-repeat="photographer in vm.pagePhotographers">
-                <td><a ng-click="vm.goToPhotographer(photographer.id)">{{ photographer.name }}</a></td>
+                <td><a 
+                       href="#!/photographer/{{ photographer.id }}">{{ photographer.name }}</a></td>
                 <td>{{ photographer.birthDate | date }}</td>
                 <td>{{ photographer.pictureCount }}</td>
             </tr>
@@ -42,7 +43,7 @@
             </button>
         </div>
     </div>
-
+    <div class="text-danger text-center">{{ vm.message }}</div>
 </div>
 
 

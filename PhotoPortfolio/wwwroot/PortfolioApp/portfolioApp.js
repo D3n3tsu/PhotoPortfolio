@@ -12,10 +12,11 @@
                     controller: 'infoController',
                     controllerAs: 'vm'
                 })
-                .when("/photographer", {
+                .when("/photographer/:id", {
                     templateUrl: "PortfolioApp/Templates/Photos.Controller.Template.html",
                     controller: "photosController",
                     controllerAs: "vm"
-                });
+                })
+                .otherwise({ redirectTo: '/' });
         });
 })();
