@@ -47,7 +47,7 @@ namespace PhotoPortfolio.Controllers
                 ));
         }
 
-        // PUT api/5
+        // PUT api/update-photographer/5
         [HttpPut("update-photographer/{id}")]
         public Task<JsonResult> UpdatePhotographer(int id,
             [FromBody]CreatePhotographerViewModel photographer)
@@ -63,7 +63,7 @@ namespace PhotoPortfolio.Controllers
                 ));
         }
 
-        // DELETE api/5
+        // DELETE api/delete-photographer/5
         [HttpDelete("delete-photographer/{id}")]
         public Task<JsonResult> DeletePhotographer(int id)
         {
@@ -72,16 +72,53 @@ namespace PhotoPortfolio.Controllers
             ));
         }
 
-        // POST photo
-        [HttpPost("upload-photo")]
-        public void UploadPhoto()
+        // POST api/upload-photo/5
+        [HttpPost("upload-photo/{photographerId}")]
+        public async Task<JsonResult> UploadPhoto(int photographerId)
         {
             var files = Request.Form.Files;
             byte[] fileData = null;
+            bool success = false;
             using (var binaryReader = new BinaryReader(files[0].OpenReadStream()))
             {
                 fileData = binaryReader.ReadBytes((int)files[0].OpenReadStream().Length);
+                if (fileData != null)
+                    success = await _photoRepository.UploadPhoto(
+                        new UploadPhotoViewModel
+                        {
+                            Body = fileData,
+                            PhotographerId = photographerId
+                        });
             }
+
+            return Json(_photoRepository.GetAllThumbnails(photographerId));
+        }
+
+        //GET api/get-thumbnails/2
+        [HttpGet("get-thumbnails/{photographerId}")]
+        public Task<JsonResult> GetAllThumbnails(int photographerId)
+        {
+            return Task.FromResult(
+                Json(_photoRepository.GetAllThumbnails(photographerId))
+                );
+        }
+
+        //GET api/download-photo/2
+        [HttpGet("download-photo/{id}")]
+        public Task<JsonResult> DownloadPhoto(int id)
+        {
+            return Task.FromResult(
+                Json(_photoRepository.DownloadPhoto(id))
+                );
+        }
+
+        //DELETE api/delete-photo/5
+        [HttpDelete("delete-photo/{id}")]
+        public Task<JsonResult> DeletePhoto(int id)
+        {
+            return Task.FromResult(
+                Json(_photoRepository.DeletePhoto(id))
+                );
         }
     }
 }
